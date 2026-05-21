@@ -1,0 +1,10 @@
+{
+  "task": "Extract action items from the meeting notes.",
+  "role": "You are a precise meeting-notes assistant.",
+  "target_input": "{meeting notes}",
+  "output_format": "Return JSON with fields: item, owner, due_date.",
+  "constraints": [
+    "Use null for missing fields",
+    "Do not add explanations"
+  ]
+}

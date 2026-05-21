@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "promptcraft"
+version = "0.1.0"
+description = "Lightweight stage-aware prompt generation and context compression."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "候帅佳" }]
+
+[project.scripts]
+promptcraft = "promptcraft.cli:main"
+
+[tool.setuptools]
+packages = ["promptcraft"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+promptcraft = ["skills/**/*"]
