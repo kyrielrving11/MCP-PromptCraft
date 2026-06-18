@@ -23,7 +23,7 @@ Least-to-Most 的核心不是简单地“逐步思考”，而是把复杂问题
 ## 流程概览
 
 1. 判断任务是否适合 Least-to-Most：多跳推理、多步骤计算、复杂规划、组合泛化、长文分析、代码排错、需要先求中间量再求最终答案的任务更适合。
-2. 读取 `assets/template.md`，优先使用“单轮零样本模板”；如果用户或系统能多次调用模型，可使用“问题拆解模板”和“子问题解答模板”进行两阶段执行。
+2. 优先使用”单轮零样本模板”；如果用户或系统能多次调用模型，可使用”问题拆解模板”和”子问题解答模板”进行两阶段执行。
 3. 在 Prompt 中明确两个阶段：
    - Problem Reducing：自上而下拆解原问题，只列出必要、有序、可回答的子问题。
    - Sequentially Solve Subquestions：自下而上逐一解答，把前一子问题答案作为后续上下文。
@@ -51,14 +51,6 @@ Least-to-Most 的核心不是简单地“逐步思考”，而是把复杂问题
 3. 对每个子问题调用子问题解答 Prompt，把已经回答过的子问题和答案作为上下文传入。
 4. 最后一个子问题的答案就是最终答案，再按用户要求的输出格式整理。
 
-## 可复用脚本
-
-```bash
-python scripts/render_least_to_most_prompt.py input.json
-python scripts/render_least_to_most_prompt.py input.json --mode decomposition
-python scripts/render_least_to_most_prompt.py input.json --mode solution
-```
-
 推荐 JSON 输入：
 
 ```json
@@ -81,8 +73,3 @@ python scripts/render_least_to_most_prompt.py input.json --mode solution
 - 如果输出格式要求“只输出 JSON/代码/最终结论”，生成的 Prompt 应要求模型内部完成拆解，最终只交付指定格式。
 - 如果用户要求“解释过程”，优先展示子问题和答案，不要输出冗长的隐式思维链。
 
-## 支持文件
-
-- 具体规则：`assets/template.md`
-- 输出示例：`assets/sample.md`
-- CLI 渲染脚本：`scripts/render_least_to_most_prompt.py`
